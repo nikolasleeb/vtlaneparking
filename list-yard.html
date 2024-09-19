@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Yard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>List Your Yard for Rent</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="list-yard.html">List Your Yard</a></li>
+                <li><a href="browse-yards.html">Browse Yards</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="yard-form">
+            <h2>Yard Details</h2>
+            <form id="yardForm">
+                <label for="name">Owner Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+            
+                <label for="address">Yard Address:</label>
+                <input type="text" id="address" name="address" required><br><br>
+            
+                <label for="size">Yard Size (in sq ft):</label>
+                <input type="number" id="size" name="size" required><br><br>
+            
+                <label for="price">Price Per Hour:</label>
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span>$</span>
+                    <input type="number" id="price" name="price" required style="flex: 1; padding-left: 5px;">
+                </div>
+                <br><br>
+            
+                <label for="start-availability">Start Time:</label>
+                <input type="datetime-local" id="start-availability" name="start-availability" required><br><br>
+            
+                <label for="end-availability">End Time:</label>
+                <input type="datetime-local" id="end-availability" name="end-availability" required><br><br>
+            
+                <input type="submit" value="List Your Yard">
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Yard Rental Service</p>
+    </footer>
+
+    <script>
+        // Handle form submission
+        document.getElementById('yardForm').onsubmit = function(event) {
+            event.preventDefault(); // Prevent the default form submission
+        
+            try {
+                // Capture form data
+                var yardData = {
+                    owner: document.getElementById('name').value,
+                    address: document.getElementById('address').value,
+                    size_sqft: document.getElementById('size').value,
+                    price_per_hour: document.getElementById('price').value,
+                    start_availability: document.getElementById('start-availability').value,
+                    end_availability: document.getElementById('end-availability').value
+                };
+    
+                console.log('Captured Yard Data:', yardData); // Debugging statement
+    
+                // Store data in localStorage (for demo purposes)
+                var listings = JSON.parse(localStorage.getItem('yardListings')) || [];
+                listings.push(yardData);
+                localStorage.setItem('yardListings', JSON.stringify(listings));
+    
+                console.log('Updated Listings:', listings); // Debugging statement
+    
+                // Display success message or reset the form
+                alert('Your yard has been listed!');
+                document.getElementById('yardForm').reset();
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        };
+    </script>
+     
+</body>
+</html>

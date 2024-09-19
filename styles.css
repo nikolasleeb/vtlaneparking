@@ -1,0 +1,147 @@
+/* General Layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Styling for navigation links to make them look like buttons */
+nav ul {
+    list-style-type: none;  /* Remove the default bullet points */
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 10px;  /* Add space between the buttons */
+}
+
+nav ul li a {
+    background-color: #5cb85c;  /* Green background */
+    color: white;  /* White text */
+    padding: 10px 20px;
+    text-decoration: none;  /* Remove underline */
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    background-color: #4cae4c;  /* Darker green on hover */
+}
+
+/* Improve Layout Spacing */
+main {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h2, h3 {
+    margin-bottom: 15px;
+}
+
+/* Form Styling */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Button Styling */
+.btn, button {
+    background-color: #5cb85c;  /* Green background */
+    color: white;  /* White text */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;  /* Make the text bold for better visibility */
+    display: inline-block;  /* Make sure the button behaves like an inline element */
+}
+
+.btn:hover, button:hover {
+    background-color: #4cae4c;  /* Darker green on hover */
+    color: white;  /* Ensure text remains white */
+}
+
+/* Yard Listings */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 5px 0;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    .btn, button {
+        width: 100%;
+    }
+
+    input, select {
+        width: 100%;
+    }
+}
+
+/* Buttons in the header (under the title) */
+header .btn {
+    background-color: #5cb85c;  /* Green background */
+    color: white;  /* White text */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;  /* Bold text for better visibility */
+    display: inline-block;
+    text-decoration: none;  /* Remove underline from anchor tags */
+}
+
+header .btn:hover {
+    background-color: #4cae4c;  /* Darker green on hover */
+    color: white;  /* Ensure text stays white */
+}

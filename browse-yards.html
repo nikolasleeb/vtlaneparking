@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Yards</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Browse Available Yards</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="list-yard.html">List Your Yard</a></li>
+                <li><a href="browse-yards.html">Browse Yards</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Search and filter controls -->
+        <section id="search-filters">
+            <h3>Search and Filter Yards</h3>
+            <input type="text" id="search-address" placeholder="Search by address" oninput="filterYards()">
+            <input type="number" id="min-size" placeholder="Min Size (sq ft)" oninput="filterYards()">
+            <input type="number" id="max-size" placeholder="Max Size (sq ft)" oninput="filterYards()">
+            <input type="number" id="min-price" placeholder="Min Price" oninput="filterYards()">
+            <input type="number" id="max-price" placeholder="Max Price" oninput="filterYards()">
+    
+            <!-- Add the new availability filter here -->
+            <h3>Filter by Availability</h3>
+            <label for="start-filter">Start Time:</label>
+            <input type="datetime-local" id="start-filter" oninput="filterYards()">
+    
+            <label for="end-filter">End Time:</label>
+            <input type="datetime-local" id="end-filter" oninput="filterYards()">
+        </section>
+    
+        <!-- Yard Listings -->
+        <section id="yard-listings">
+            <h2>Yard Listings</h2>
+            <ul id="listingsContainer">
+                <!-- Yard listings will be displayed here -->
+            </ul>
+        </section>
+    
+        <!-- Map Placeholder -->
+        <section id="map">
+            <h3>Yards Map</h3>
+            <iframe width="800" height="600" frameborder="0" scrolling="no" allowfullscreen src="https://tobmaps.blacksburg.gov/portal/apps/webappviewer/index.html?id=5ca8847c8e4f4fe68120e9bb08e10840&extent=-8953276.6654%2C4470463.7032%2C-8949836.9991%2C4472126.2085%2C102100"></iframe>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Yard Rental Service</p>
+    </footer>
+
+    <script>
+        // Sample listings for testing purposes
+        const listings = [
+            { address: '123 Main St', size_sqft: 500, price_per_hour: 25, start_availability: '2024-09-20T09:00', end_availability: '2024-09-20T18:00' },
+            { address: '456 Oak Ave', size_sqft: 800, price_per_hour: 30, start_availability: '2024-09-21T09:00', end_availability: '2024-09-21T18:00' },
+            { address: '789 Pine St', size_sqft: 600, price_per_hour: 20, start_availability: '2024-09-22T09:00', end_availability: '2024-09-22T18:00' }
+        ];
+
+        // Function to display yards
+        function displayYards(yards) {
+        const listingsContainer = document.getElementById('listingsContainer');
+        listingsContainer.innerHTML = '';  // Clear previous listings
+
+        yards.forEach(listing => {
+            // Parse and format the start and end availability
+            const startDate = new Date(listing.start_availability).toLocaleString();
+            const endDate = new Date(listing.end_availability).toLocaleString();
+
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${listing.address}:</strong> ${listing.size_sqft} sq ft, $${listing.price_per_hour}/hour, Available: ${startDate} - ${endDate}`;
+            listingsContainer.appendChild(li);
+        });
+}
+
+        // The filterYards function to filter listings
+        function filterYards() {
+            const searchAddress = document.getElementById('search-address').value.toLowerCase();
+            const minSize = document.getElementById('min-size').value;
+            const maxSize = document.getElementById('max-size').value;
+            const minPrice = document.getElementById('min-price').value;
+            const maxPrice = document.getElementById('max-price').value;
+            const startFilter = document.getElementById('start-filter').value;
+            const endFilter = document.getElementById('end-filter').value;
+
+            const filteredYards = listings.filter(listing => {
+                const matchesAddress = listing.address.toLowerCase().includes(searchAddress);
+                const matchesSize = (!minSize || listing.size_sqft >= minSize) && (!maxSize || listing.size_sqft <= maxSize);
+                const matchesPrice = (!minPrice || listing.price_per_hour >= minPrice) && (!maxPrice || listing.price_per_hour <= maxPrice);
+                const matchesAvailability = (!startFilter || new Date(listing.start_availability) >= new Date(startFilter)) &&
+                                            (!endFilter || new Date(listing.end_availability) <= new Date(endFilter));
+                
+                return matchesAddress && matchesSize && matchesPrice && matchesAvailability;
+            });
+
+            displayYards(filteredYards);
+        }
+
+        // Initially display all listings
+        displayYards(listings);
+    </script>
+</body>
+</html>
